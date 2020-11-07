@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	_ "embed"
 	"fmt"
 	"github.com/pkg/browser"
 	"io/fs"

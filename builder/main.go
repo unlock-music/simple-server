@@ -16,7 +16,7 @@ import (
 
 const buildTempDir = "./build"
 const checkVersionUrl = "https://api.github.com/repos/ix64/unlock-music/releases/latest"
-const assetFilename = "modern.tar.gz"
+const assetFilename = "legacy.tar.gz"
 const checksumFilename = "sha256sum.txt"
 
 func main() {
