@@ -3,7 +3,7 @@
 - 基于Golang 1.16的embed功能
 - 方便普通使用者运行和部署
 
-##使用方法
+## 使用方法
 ### 从Release下载
 - [Release](https://github.com/unlock-music/simple-server/releases)
 ### 手动构建
