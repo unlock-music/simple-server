@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	_ "embed"
+	"fmt"
 	"github.com/pkg/browser"
 	"io/fs"
 	"log"
@@ -15,19 +16,25 @@ import (
 //go:generate go run ./builder
 //go:embed build/for-build
 var asset embed.FS
+var listen = "localhost:8086"
 
 func main() {
+	if tmp := os.Getenv("UM_LISTEN"); tmp != "" {
+		listen = tmp
+	}
 	pfxFs := WithPrefix(asset, "build/for-build")
 	go func() {
-		err := http.ListenAndServe("localhost:6280", http.FileServer(http.FS(pfxFs)))
+		err := http.ListenAndServe(listen, http.FileServer(http.FS(pfxFs)))
 		if err != nil {
+			log.Println("启动出错，请检查是否有其他程序占用了端口：" + listen)
+			_, _ = fmt.Scanln()
 			log.Fatal(err)
 		}
 	}()
-	log.Println("you can now open browser with: http://localhost:6280 to access this tool.")
-	err := browser.OpenURL("http://localhost:6280")
+	log.Printf("使用浏览器打开: %s 即可访问。", listen)
+	err := browser.OpenURL("http://" + listen)
 	if err != nil {
-		log.Println("error while opening browser:", err)
+		log.Println("自动打开浏览器错误，需要手动打开: "+listen, err)
 	}
 	sign := make(chan os.Signal, 1)
 	signal.Notify(sign, os.Interrupt, os.Kill)
