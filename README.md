@@ -7,7 +7,7 @@
 ### 从Release下载
 - [Release](https://github.com/unlock-music/simple-server/releases)
 ### 手动构建
-- 安装golang 1.16以上的版本(Tips 2020/11/07: 当前未发布，需要从源码构建)
+- 安装golang 1.16以上的版本(Tips 2020/12/28: Golang1.16当前为beta状态)
 ```shell script
 go generate
 go build
